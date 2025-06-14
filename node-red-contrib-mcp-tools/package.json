@@ -1,0 +1,34 @@
+{
+  "name": "node-red-contrib-mcp-tools",
+  "version": "1.0.0",
+  "description": "Node-RED component for executing MCP (Model Context Protocol)",
+  "main": "mcp-tools.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-red",
+    "mcp",
+    "model-context-protocol",
+    "ai",
+    "tools",
+    "openai"
+  ],
+  "author": "Seu Nome",
+  "license": "MIT",
+  "node-red": {
+    "nodes": {
+      "mcp-tools": "mcp-tools.js"
+    }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moisesfreitas-seven/node-red-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/moisesfreitas-seven/node-red-mcp-server/issues"
+  },
+  "homepage": "https://github.com/moisesfreitas-seven/node-red-mcp-server#readme"
+}
+
