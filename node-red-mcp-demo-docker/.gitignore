@@ -1,0 +1,15 @@
+
+node_red_data/.npm/_cacache/*
+node_red_data/node_modules/.bin
+node_red_data/node_modules/node-red-contrib-postgresql/node_modules/.bin/*
+node_red_data/.config.users.json
+node_red_data/.config.users.json.backup
+node_red_data/.sessions.json
+node_red_data/.config.projects.json
+node_red_data/.config.projects.json.backup
+
+*.log
+
+# Dependency directories
+node_modules/
+node_red_data/projects/

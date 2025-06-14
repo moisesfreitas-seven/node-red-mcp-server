@@ -1,0 +1,160 @@
+<script type="text/javascript">
+    RED.nodes.registerType('mcp-tools', {
+        category: 'function',
+        color: '#4CAF50',
+        defaults: {
+            name: {value: ""},
+            serverUrl: {value: "http://localhost:3000", required: true},
+            prompt: {value: ""},
+            apiKey: {value: "", required: false},
+            mcpServerCommand: {value: "node", required: true},
+            mcpServerArgs: {value: "../mcp-server/build/index.js", required: true},
+            sessionId: {value: "default", required: true},
+            timeout: {value: 30000, validate: RED.validators.number()}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "function.png",
+        label: function() {
+            return this.name || "MCP tools";
+        },
+        labelStyle: function() {
+            return this.name ? "node_label_italic" : "";
+        },
+        oneditprepare: function() {
+            // Configurar editor de prompt com mais espaço
+            $("#node-input-prompt").css("height", "100px");
+            
+            // Configurar campo de API Key como password
+            $("#node-input-apiKey").attr("type", "password");
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="mcp-tools">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Nome</label>
+        <input type="text" id="node-input-name" placeholder="Nome do nó">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-serverUrl"><i class="fa fa-server"></i> URL do MCP Host</label>
+        <input type="text" id="node-input-serverUrl" placeholder="http://localhost:3000">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-apiKey"><i class="fa fa-key"></i> API Key OpenAI</label>
+        <input type="password" id="node-input-apiKey" placeholder="sk-...">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-mcpServerCommand"><i class="fa fa-terminal"></i> Comando MCP Server</label>
+        <input type="text" id="node-input-mcpServerCommand" placeholder="node">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-mcpServerArgs"><i class="fa fa-list"></i> Argumentos MCP Server</label>
+        <input type="text" id="node-input-mcpServerArgs" placeholder="../mcp-server/build/index.js">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-sessionId"><i class="fa fa-user"></i> Session ID</label>
+        <input type="text" id="node-input-sessionId" placeholder="default">
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-prompt"><i class="fa fa-comment"></i> Prompt Padrão</label>
+        <textarea id="node-input-prompt" placeholder="Digite o prompt padrão (opcional)..." rows="4" style="width: 100%; resize: vertical;"></textarea>
+    </div>
+    
+    <div class="form-row">
+        <label for="node-input-timeout"><i class="fa fa-clock-o"></i> Timeout (ms)</label>
+        <input type="number" id="node-input-timeout" placeholder="30000" min="1000" max="300000">
+    </div>
+    
+    <div class="form-tips">
+        <p><strong>Configuração:</strong></p>
+        <ul>
+            <li><strong>URL do MCP Host:</strong> Endereço onde o mcp-host está rodando</li>
+            <li><strong>API Key OpenAI:</strong> Sua chave da API da OpenAI (sk-...)</li>
+            <li><strong>Comando MCP Server:</strong> Comando para executar o servidor MCP (ex: node, python, npx)</li>
+            <li><strong>Argumentos MCP Server:</strong> Argumentos separados por vírgula (ex: ../mcp-server/build/index.js)</li>
+            <li><strong>Session ID:</strong> Identificador da sessão para reutilizar conexões</li>
+        </ul>
+        
+        <p><strong>Uso:</strong></p>
+        <ul>
+            <li>O prompt pode ser definido aqui ou enviado via <code>msg.prompt</code> ou <code>msg.payload</code></li>
+            <li>Todos os parâmetros podem ser sobrescritos via propriedades da mensagem</li>
+            <li>A resposta será retornada em <code>msg.payload</code></li>
+            <li>Detalhes completos estarão disponíveis em <code>msg.mcpResult</code></li>
+        </ul>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="mcp-tools">
+    <p>Executa um MCP (Model Context Protocol) através de host.</p>
+    
+    <h3>Entradas</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>O prompt a ser enviado para o MCP Server (se não especificado em msg.prompt)</dd>
+        
+        <dt class="optional">prompt <span class="property-type">string</span></dt>
+        <dd>Prompt específico para esta execução (sobrescreve o prompt padrão)</dd>
+        
+        <dt class="optional">apiKey <span class="property-type">string</span></dt>
+        <dd>API Key da OpenAI (sobrescreve a configuração do nó)</dd>
+        
+        <dt class="optional">mcpServerCommand <span class="property-type">string</span></dt>
+        <dd>Comando para executar o servidor MCP (sobrescreve a configuração do nó)</dd>
+        
+        <dt class="optional">mcpServerArgs <span class="property-type">string|array</span></dt>
+        <dd>Argumentos do servidor MCP (sobrescreve a configuração do nó)</dd>
+        
+        <dt class="optional">sessionId <span class="property-type">string</span></dt>
+        <dd>ID da sessão para reutilizar conexões (sobrescreve a configuração do nó)</dd>
+    </dl>
+
+    <h3>Saídas</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string</span></dt>
+        <dd>A resposta do MCP Server</dd>
+        
+        <dt>mcpResult <span class="property-type">object</span></dt>
+        <dd>Objeto contendo:
+            <ul>
+                <li><code>success</code> - Se a execução foi bem-sucedida</li>
+                <li><code>response</code> - A resposta do MCP</li>
+                <li><code>toolsUsed</code> - Array das ferramentas utilizadas</li>
+                <li><code>messages</code> - Histórico completo da conversa</li>
+                <li><code>originalPrompt</code> - O prompt original enviado</li>
+                <li><code>serverCommand</code> - Comando usado para o servidor MCP</li>
+                <li><code>serverArgs</code> - Argumentos usados para o servidor MCP</li>
+                <li><code>sessionId</code> - ID da sessão utilizada</li>
+            </ul>
+        </dd>
+    </dl>
+
+    <h3>Arquitetura</h3>
+    <p>Este componente utiliza uma arquitetura modular:</p>
+    <ul>
+        <li><strong>mcp-host:</strong> Servidor Express.js que orquestra as comunicações</li>
+        <li><strong>mcp-client:</strong> Cliente que interage com OpenAI e o servidor MCP</li>
+        <li><strong>mcp-server:</strong> Servidor MCP com ferramentas e recursos</li>
+    </ul>
+    
+    <h3>Configuração</h3>
+    <p>1. Inicie o mcp-host: <code>cd mcp-host && npm start</code></p>
+    <p>2. Configure a API Key da OpenAI</p>
+    <p>3. Configure o comando e argumentos do servidor MCP</p>
+    <p>4. Use diferentes Session IDs para múltiplas conexões</p>
+    
+    <h3>Exemplo de uso</h3>
+    <p>1. Configure a URL do mcp-host (ex: http://localhost:3000)</p>
+    <p>2. Defina sua API Key da OpenAI</p>
+    <p>3. Configure o comando do servidor MCP (ex: node, python, npx)</p>
+    <p>4. Defina os argumentos (ex: ../mcp-server/build/index.js)</p>
+    <p>5. Envie prompts via msg.payload</p>
+</script>
+
