@@ -1,0 +1,15 @@
+---
+version: '3'
+services:
+  mcp-demo:
+    #build:
+    #    context: .
+    #    dockerfile: Dockerfile
+    image: nodered/node-red:4.0.0
+    container_name: mcp-demo
+    ports:
+      - "1899:1880"
+    volumes:
+        -  ./node_red_data:/data
+    environment:
+      ADMIN_PASSWORD: '7OhBgb4IcnJmxYJiZ73Fk.3Ht9qovXFmhVMncQ3WTT2Q9TO9WRgV6' # admin
