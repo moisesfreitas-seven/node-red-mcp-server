@@ -1,6 +1,6 @@
 # Node-RED MCP Server Template
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/moises-paschoalick/node-red-mcp-server/tree/main/node-red-docker)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.com/deploy/node-red-mcp)
 
 > **🚀 Template pronto para deploy no Railway** - Node-RED configurado com MCP (Model Context Protocol) para integração com LLMs
 
