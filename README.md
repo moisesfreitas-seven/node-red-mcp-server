@@ -25,26 +25,36 @@ Passos para rodar o projeto via docker compose:
 1. Clone este repositório:
    ```bash
    git clone https://github.com/moises-paschoalick/node-red-mcp-server
-   cd node-red-docker
+   cd node-red-mcp-server
    docker compose up -d
    ```
 
 2. Abrir o projeto em: http://localhost:1899/
 
 3. Instalar o node mcp-tools 
-Para isso preciamos ter o node mcp-tools, instalar o node-red-contribu-mcp-tools na UI do node-red.
+Para exibir o node mcp-tools, precisamos instalar o node-red-contribu-mcp-tools na UI do node-red.
+[Imagem 1]
+     3. a Clique em fechar
+     4. b Opções -> Gerenciar Paleta
+          Na aba "Instalar" digite
+          node-red-contrib-mcp-tools
 
-Opções -> Gerenciar Paleta
-Instalar node-red-contrib-mcp-tools
 [Imagem instalação]
 
+Vai aparecer o node em função
 
-[link do node-red-contrib-mcp-tools]
+Caso queira ver mais detalhes do projeto e o seu código fonte veja abaixo node packager manager (npm)
+Seja bem vindo para contribuir com o projeto, vamos tornar o node-red mais relevante que o n8n em criar agents de IA :-)
 link do projeto npm
+[link do node-red-contrib-mcp-tools]
+
 
 4. Configurar o componente com a chave da OpenAI
 [imagem do componente]
 
+
+Veja o vídeo abaixo para mais informaçòes:
+https://www.youtube.com/watch?v=IcAkHl3yLsg
 
 ## 🧱 Estrutura dos Containers
 
