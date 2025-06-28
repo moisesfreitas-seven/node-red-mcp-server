@@ -1,0 +1,23 @@
+# Ignora dependências locais
+node_modules
+
+# Ignora controle de versão
+.git
+.gitignore
+
+# Ignora logs e arquivos temporários
+*.log
+tmp/
+*.swp
+
+# Ignora arquivos sensíveis
+.env
+.env.local
+*.pem
+
+# Ignora testes e cobertura
+test/
+coverage/
+
+# Outras pastas desnecessárias
+docs/
