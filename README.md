@@ -2,7 +2,7 @@
 
 Connects Node-RED to LLMs via the Model Context Protocol (MCP) for intelligent AI workflows.
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/moises-paschoalick/node-red-mcp-server/tree/main/node-red-docker)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.com/deploy/node-red-mcp)
 
 > **🚀 Ready-to-deploy Railway template** - Node-RED configured with MCP (Model Context Protocol) for LLM integration
 
