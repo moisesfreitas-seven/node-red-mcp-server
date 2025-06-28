@@ -2,158 +2,160 @@
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/moises-paschoalick/node-red-mcp-server/tree/main/node-red-docker)
 
-> **🚀 Template pronto para deploy no Railway** - Node-RED configurado com MCP (Model Context Protocol) para integração com LLMs
+> **🚀 Ready-to-deploy Railway template** - Node-RED configured with MCP (Model Context Protocol) for LLM integration
 
-## 📋 Descrição do Projeto
+[🇧🇷 Read in Portuguese](README_br.md)
 
-Este template fornece um ambiente Node-RED completo e pré-configurado com suporte ao **Model Context Protocol (MCP)**, permitindo que seus fluxos interajam diretamente com modelos de linguagem como GPT-4 da OpenAI.
+## 📋 Project Description
 
-### 🎯 O que este template resolve
+This template provides a complete and pre-configured Node-RED environment with **Model Context Protocol (MCP)** support, allowing your flows to interact directly with language models like OpenAI's GPT-4.
 
-- **Integração LLM**: Conecta Node-RED a modelos de IA via MCP
-- **Deploy Simplificado**: Um clique para ter Node-RED rodando na nuvem
-- **Configuração Automática**: Tudo pré-configurado e pronto para uso
-- **Escalabilidade**: Roda na infraestrutura do Railway com alta disponibilidade
+### 🎯 What this template solves
 
-## ⚡ Funcionalidades Principais
+- **LLM Integration**: Connects Node-RED to AI models via MCP
+- **Simplified Deployment**: One-click to have Node-RED running in the cloud
+- **Automatic Configuration**: Everything pre-configured and ready to use
+- **Scalability**: Runs on Railway infrastructure with high availability
 
-- ✅ **Node-RED 4.0.0** com interface web completa
-- ✅ **MCP Tools Node** pré-instalado e configurado
-- ✅ **Suporte a OpenAI** integrado
-- ✅ **Deploy automático** no Railway
-- ✅ **Configuração via variáveis de ambiente**
-- ✅ **Logs centralizados** e monitoramento
-- ✅ **Backup automático** de fluxos e configurações
+## ⚡ Main Features
 
-## 🛠️ Pré-requisitos
+- ✅ **Node-RED 4.0.0** with complete web interface
+- ✅ **MCP Tools Node** pre-installed and configured
+- ✅ **OpenAI Support** integrated
+- ✅ **Automatic deployment** on Railway
+- ✅ **Configuration via environment variables**
+- ✅ **Centralized logs** and monitoring
+- ✅ **Automatic backup** of flows and configurations
 
-- Conta no [Railway](https://railway.app) (gratuita)
-- Chave da API da OpenAI (opcional, para funcionalidades LLM)
-- Navegador web moderno
+## 🛠️ Prerequisites
 
-## 🚀 Como Usar
+- [Railway](https://railway.app) account (free)
+- OpenAI API key (optional, for LLM features)
+- Modern web browser
 
-### Deploy Automático (Recomendado)
+## 🚀 How to Use
 
-1. **Clique no botão "Deploy on Railway"** acima
-2. **Conecte sua conta GitHub** (se necessário)
-3. **Configure as variáveis de ambiente** (veja seção Configurações)
-4. **Aguarde o deploy** (2-3 minutos)
-5. **Acesse sua instância** via URL fornecida pelo Railway
+### Automatic Deployment (Recommended)
 
-### Deploy Manual
+1. **Click the "Deploy on Railway" button** above
+2. **Connect your GitHub account** (if necessary)
+3. **Configure environment variables** (see Configuration section)
+4. **Wait for deployment** (2-3 minutes)
+5. **Access your instance** via URL provided by Railway
+
+### Manual Deployment
 
 ```bash
-# Clone o repositório
+# Clone the repository
 git clone https://github.com/moises-paschoalick/node-red-mcp-server
 cd node-red-docker
 
-# Deploy no Railway via CLI
+# Deploy to Railway via CLI
 railway login
 railway init
 railway up
 ```
 
-## ⚙️ Configurações
+## ⚙️ Configuration
 
-### Variáveis de Ambiente
+### Environment Variables
 
-| Variável | Descrição | Padrão | Obrigatório |
-|----------|-----------|--------|-------------|
-| `ADMIN_PASSWORD` | Senha do admin do Node-RED | `admin123` | ✅ |
-| `NODE_RED_ENABLE_PROJECTS` | Habilitar projetos | `false` | ❌ |
-| `NODE_RED_ENABLE_EDITOR_THEME` | Tema do editor | `default` | ❌ |
-| `OPENAI_API_KEY` | Chave da API OpenAI | - | ❌ |
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `ADMIN_PASSWORD` | Node-RED admin password | `admin123` | ✅ |
+| `NODE_RED_ENABLE_PROJECTS` | Enable projects | `false` | ❌ |
+| `NODE_RED_ENABLE_EDITOR_THEME` | Editor theme | `default` | ❌ |
+| `OPENAI_API_KEY` | OpenAI API key | - | ❌ |
 
-### Portas
+### Ports
 
-- **1880**: Interface web do Node-RED
-- **1881**: API REST do Node-RED (se habilitada)
+- **1880**: Node-RED web interface
+- **1881**: Node-RED REST API (if enabled)
 
 ### Volumes
 
-- `/data`: Dados persistentes do Node-RED
-  - Fluxos e configurações
-  - Node modules customizados
-  - Logs e backups
+- `/data`: Persistent Node-RED data
+  - Flows and configurations
+  - Custom node modules
+  - Logs and backups
 
-## 🏃‍♂️ Como Rodar Localmente
+## 🏃‍♂️ How to Run Locally
 
-### Com Docker Compose
+### With Docker Compose
 
 ```bash
-# Clone o repositório
+# Clone the repository
 git clone https://github.com/moises-paschoalick/node-red-mcp-server
 cd node-red-docker
 
-# Configure as variáveis de ambiente
+# Configure environment variables
 cp .env.example .env
-# Edite o arquivo .env com suas configurações
+# Edit the .env file with your configurations
 
 # Execute
 docker-compose up -d
 
-# Acesse em http://localhost:1880
+# Access at http://localhost:1880
 ```
 
-### Com Docker
+### With Docker
 
 ```bash
-# Build da imagem
+# Build the image
 docker build -t node-red-mcp .
 
-# Execute o container
+# Run the container
 docker run -d \
   --name node-red-mcp \
   -p 1880:1880 \
-  -e ADMIN_PASSWORD=sua-senha \
+  -e ADMIN_PASSWORD=your-password \
   node-red-mcp
 ```
 
 ## 📸 Screenshots
 
-### Interface Principal do Node-RED
+### Node-RED Main Interface
 ![Node-RED Interface](https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=Node-RED+Interface)
 
-### MCP Tools Node Configurado
+### MCP Tools Node Configured
 ![MCP Tools Configuration](https://via.placeholder.com/600x300/2196F3/FFFFFF?text=MCP+Tools+Configuration)
 
-### Exemplo de Fluxo com LLM
+### Flow Example with LLM
 ![Flow Example](https://via.placeholder.com/800x400/FF9800/FFFFFF?text=Flow+with+LLM+Integration)
 
-## 🔧 Configuração Inicial
+## 🔧 Initial Configuration
 
-### 1. Primeiro Acesso
+### 1. First Access
 
-1. Acesse a URL fornecida pelo Railway
-2. Faça login com:
-   - **Usuário**: `admin`
-   - **Senha**: Valor da variável `ADMIN_PASSWORD`
+1. Access the URL provided by Railway
+2. Login with:
+   - **Username**: `admin`
+   - **Password**: Value of `ADMIN_PASSWORD` variable
 
-### 2. Configurar MCP Tools
+### 2. Configure MCP Tools
 
-1. **Arraste o nó "MCP Tools"** para o canvas
-2. **Configure as propriedades**:
-   - **MCP Host URL**: `http://localhost:3000` (para local) ou URL do seu MCP Host
-   - **OpenAI API Key**: Sua chave da OpenAI
-   - **Server Command**: Comando do servidor MCP
-   - **Server Args**: Argumentos do servidor
+1. **Drag the "MCP Tools" node** to the canvas
+2. **Configure the properties**:
+   - **MCP Host URL**: `http://localhost:3000` (for local) or your MCP Host URL
+   - **OpenAI API Key**: Your OpenAI key
+   - **Server Command**: MCP server command
+   - **Server Args**: Server arguments
 
-### 3. Testar Integração
+### 3. Test Integration
 
-1. **Crie um fluxo simples** com:
+1. **Create a simple flow** with:
    - Trigger (inject)
    - MCP Tools node
    - Debug node
-2. **Configure o prompt** no MCP Tools
-3. **Deploy e teste**
+2. **Configure the prompt** in MCP Tools
+3. **Deploy and test**
 
-## 📚 Exemplos de Uso
+## 📚 Usage Examples
 
-### Exemplo 1: Chatbot Simples
+### Example 1: Simple Chatbot
 
 ```javascript
-// Fluxo básico de chatbot
+// Basic chatbot flow
 [
   {
     "id": "chatbot-flow",
@@ -187,10 +189,10 @@ docker run -d \
 ]
 ```
 
-### Exemplo 2: Análise de Dados
+### Example 2: Data Analysis
 
 ```javascript
-// Fluxo para análise de dados com LLM
+// Flow for data analysis with LLM
 [
   {
     "id": "data-analysis",
@@ -222,134 +224,134 @@ docker run -d \
 ]
 ```
 
-## 🔗 Integrações
+## 🔗 Integrations
 
-### MCP Servers Suportados
+### Supported MCP Servers
 
-- **Local MCP Server**: Incluído no template
+- **Local MCP Server**: Included in template
 - **Remote MCP Servers**: Via Smithery.io
-- **Custom MCP Servers**: Sua própria implementação
+- **Custom MCP Servers**: Your own implementation
 
-### LLMs Suportados
+### Supported LLMs
 
-- **OpenAI GPT-4**: Configuração padrão
-- **OpenAI GPT-3.5**: Suportado
-- **Claude**: Via configuração customizada
-- **Outros**: Via adaptadores MCP
+- **OpenAI GPT-4**: Default configuration
+- **OpenAI GPT-3.5**: Supported
+- **Claude**: Via custom configuration
+- **Others**: Via MCP adapters
 
 ## 🐛 Troubleshooting
 
-### Problemas Comuns
+### Common Issues
 
-#### 1. Node-RED não inicia
+#### 1. Node-RED doesn't start
 ```bash
-# Verifique os logs
+# Check logs
 docker logs node-red-mcp
 
-# Verifique as permissões
+# Check permissions
 docker exec -it node-red-mcp ls -la /data
 ```
 
-#### 2. MCP Tools não funciona
-- Verifique se a API Key da OpenAI está correta
-- Confirme se o MCP Host está acessível
-- Verifique os logs do MCP Host
+#### 2. MCP Tools doesn't work
+- Verify OpenAI API key is correct
+- Confirm MCP Host is accessible
+- Check MCP Host logs
 
-#### 3. Erro de permissões
+#### 3. Permission errors
 ```bash
-# Corrija as permissões
+# Fix permissions
 docker exec -it node-red-mcp chown -R node-red:node-red /data
 ```
 
-### Logs e Debug
+### Logs and Debug
 
 ```bash
-# Logs do Node-RED
+# Node-RED logs
 docker logs -f node-red-mcp
 
-# Logs do MCP Host (se aplicável)
+# MCP Host logs (if applicable)
 docker logs -f mcp-host
 
-# Acesse os logs via interface web
+# Access logs via web interface
 # http://localhost:1880/admin/logs
 ```
 
-## 📈 Monitoramento
+## 📈 Monitoring
 
-### Métricas Disponíveis
+### Available Metrics
 
 - **CPU Usage**: Via Railway Dashboard
 - **Memory Usage**: Via Railway Dashboard
 - **Network Traffic**: Via Railway Dashboard
 - **Application Logs**: Via Railway Logs
 
-### Alertas
+### Alerts
 
-Configure alertas no Railway para:
-- Uso de CPU > 80%
-- Uso de memória > 80%
-- Erros de aplicação
-- Tempo de resposta > 5s
+Configure alerts in Railway for:
+- CPU usage > 80%
+- Memory usage > 80%
+- Application errors
+- Response time > 5s
 
-## 🔄 Backup e Restore
+## 🔄 Backup and Restore
 
-### Backup Automático
+### Automatic Backup
 
-O Railway faz backup automático dos volumes. Para backup manual:
+Railway automatically backs up volumes. For manual backup:
 
 ```bash
-# Backup dos dados
+# Backup data
 docker exec node-red-mcp tar -czf /tmp/backup.tar.gz /data
 
-# Download do backup
+# Download backup
 docker cp node-red-mcp:/tmp/backup.tar.gz ./backup.tar.gz
 ```
 
 ### Restore
 
 ```bash
-# Upload do backup
+# Upload backup
 docker cp ./backup.tar.gz node-red-mcp:/tmp/
 
-# Restore dos dados
+# Restore data
 docker exec node-red-mcp tar -xzf /tmp/backup.tar.gz -C /
 ```
 
-## 🤝 Contribuição
+## 🤝 Contributing
 
-1. **Fork** o projeto
-2. **Crie uma branch** para sua feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** para a branch (`git push origin feature/AmazingFeature`)
-5. **Abra um Pull Request**
+1. **Fork** the project
+2. **Create a branch** for your feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
 
-## 📄 Licença
+## 📄 License
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Suporte
+## 🆘 Support
 
-### Canais de Ajuda
+### Help Channels
 
-- **📧 Email**: [seu-email@exemplo.com](mailto:seu-email@exemplo.com)
+- **📧 Email**: [your-email@example.com](mailto:your-email@example.com)
 - **🐛 Issues**: [GitHub Issues](https://github.com/moises-paschoalick/node-red-mcp-server/issues)
-- **💬 Discord**: [Link do Discord](https://discord.gg/seu-servidor)
-- **📖 Wiki**: [Documentação Wiki](https://github.com/moises-paschoalick/node-red-mcp-server/wiki)
+- **💬 Discord**: [Discord Link](https://discord.gg/your-server)
+- **📖 Wiki**: [Wiki Documentation](https://github.com/moises-paschoalick/node-red-mcp-server/wiki)
 
-### Recursos Úteis
+### Useful Resources
 
 - [Node-RED Documentation](https://nodered.org/docs/)
 - [Model Context Protocol](https://modelcontextprotocol.io/)
 - [Railway Documentation](https://docs.railway.app/)
 - [OpenAI API Documentation](https://platform.openai.com/docs/)
 
-## 🙏 Agradecimentos
+## 🙏 Acknowledgments
 
-- [Node-RED](https://nodered.org/) - Plataforma de programação visual
-- [Railway](https://railway.app/) - Plataforma de deploy
-- [OpenAI](https://openai.com/) - Modelos de linguagem
-- [MCP Community](https://modelcontextprotocol.io/) - Protocolo MCP
+- [Node-RED](https://nodered.org/) - Visual programming platform
+- [Railway](https://railway.app/) - Deployment platform
+- [OpenAI](https://openai.com/) - Language models
+- [MCP Community](https://modelcontextprotocol.io/) - MCP Protocol
 
 ---
 
-**⭐ Se este template foi útil, considere dar uma estrela no repositório!**
+**⭐ If this template was helpful, consider giving a star to the repository!**
