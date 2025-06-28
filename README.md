@@ -2,98 +2,123 @@
 
 Connects Node-RED to LLMs via the Model Context Protocol (MCP) for intelligent AI workflows.
 
-[Português-Brasil]
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/moises-paschoalick/node-red-mcp-server/tree/main/node-red-docker)
 
-[Imagem do projeto inicial]
+> **🚀 Ready-to-deploy Railway template** - Node-RED configured with MCP (Model Context Protocol) for LLM integration
 
-Este projeto contém uma estrutura Docker com dois containers principais que integram o Node-RED e o mcp-host para rodar o MCP Server (Model Context Protocol). O objetivo é permitir que fluxos no Node-RED possam interagir com modelos LLM como o GPT-4 da OpenAI, usando um servidor MCP.
+[🇧🇷 Read in Portuguese](README_br.md)
 
-Essa primeira versão suporta somente o modelo GTP-4 da OpenAI.
+## 📋 Project Description
 
-Você consegue rodar um mcp-local e remoto.
-Exemlo de um MCP remoto:
+This project contains a Docker structure with two main containers that integrate Node-RED and mcp-host to run the MCP Server (Model Context Protocol). The goal is to allow Node-RED flows to interact with LLM models like OpenAI's GPT-4 using an MCP server.
 
-npx
--y, @smithery/cli@latest, run, @nickclyde/duckduckgo-mcp-server, --key, sua-chave-do-smithery
+This first version supports only the GPT-4 model from OpenAI.
 
-[Link: Encontre outros mcp cno smithery.io ]
+You can run both local and remote MCP servers.
+Example of a remote MCP:
 
-## ▶️ Como executar
+```bash
+npx -y @smithery/cli@latest run @nickclyde/duckduckgo-mcp-server --key your-smithery-key
+```
 
-Passos para rodar o projeto via docker compose:
+[🔗 Find other MCPs on smithery.io](https://smithery.io)
 
-1. Clone este repositório:
+## 🚀 Ready-to-Deploy Templates
+
+### Node-RED MCP Template for Railway
+
+To facilitate deployment and get started quickly, we've created an optimized template for Railway:
+
+**[📋 View Complete Template](node-red-docker/README.md)**
+
+**Template Features:**
+- ✅ **One-click deploy** on Railway
+- ✅ **Node-RED 4.0.0** pre-configured
+- ✅ **MCP Tools Node** already installed
+- ✅ **Automatic configuration** via environment variables
+- ✅ **Automatic backup** of flows and configurations
+- ✅ **Integrated monitoring**
+
+**How to use:**
+1. Access the [Template README](node-red-docker/README.md)
+2. Click the "Deploy on Railway" button
+3. Configure your environment variables
+4. Ready! Node-RED running in the cloud
+
+---
+
+## ▶️ How to Run
+
+Steps to run the project via docker compose:
+
+1. Clone this repository:
    ```bash
    git clone https://github.com/moises-paschoalick/node-red-mcp-server
    cd node-red-docker
    docker compose up -d
    ```
 
-2. Abrir o projeto em: http://localhost:1899/
+2. Open the project at: http://localhost:1899/
 
-3. Instalar o node mcp-tools 
-Para isso preciamos ter o node mcp-tools, instalar o node-red-contribu-mcp-tools na UI do node-red.
+3. Install the mcp-tools node
+   To do this, we need to have the mcp-tools node, install node-red-contrib-mcp-tools in the Node-RED UI.
 
-Opções -> Gerenciar Paleta
-Instalar node-red-contrib-mcp-tools
-[Imagem instalação]
+   Options -> Manage Palette
+   Install node-red-contrib-mcp-tools
+   [Installation Image]
 
+   [link to node-red-contrib-mcp-tools]
+   npm project link
 
-[link do node-red-contrib-mcp-tools]
-link do projeto npm
+4. Configure the component with your OpenAI API key
+   [Component Image]
 
-4. Configurar o componente com a chave da OpenAI
-[imagem do componente]
-
-
-## 🧱 Estrutura dos Containers
+## 🧱 Container Structure
 
 - **`mcp-host`**  
-  Componente feito em Node.js que faz a ponte (bridge) entre o Node-RED (via componente `mcp-tools`) e os MCP Servers.  
-  Ele é responsável por intermediar a comunicação entre o `mcp-client` (modeloLLM) e o `mcp-server` (entende a implementação das tools).
+  Component built in Node.js that acts as a bridge between Node-RED (via `mcp-tools` component) and MCP Servers.  
+  It is responsible for mediating communication between the `mcp-client` (LLM model) and the `mcp-server` (understands tool implementations).
 
 - **`mcp-server-demo`** (Node-RED)  
-  Contém o ambiente do Node-RED já configurado para se comunicar com o `mcp-host` usando o componente `mcp-tools`. É um exemplo de um mcp-server feito em NodeJS para testar e verificar se o ambiente está funcional.
+  Contains the Node-RED environment already configured to communicate with `mcp-host` using the `mcp-tools` component. It's an example of an MCP server built in NodeJS to test and verify if the environment is functional.
 
-> **Importante**: no componente **mcp-tools** dentro do Node-RED, é necessário configurar a URL do MCP Host como:
+> **Important**: in the **mcp-tools** component within Node-RED, you need to configure the MCP Host URL as:
 > ```
 > http://mcp-host:3000
 > ```
 
 ---
 
-## 📦 Componentes
+## 📦 Components
 
 - **`mcp-host`**
-  - Recebe chamadas do Node-RED via `mcp-tools`
-  - Redireciona a solicitação para o `mcp-client`
-  - Encaminha o resultado para o `mcp-server` (local ou remoto)
+  - Receives calls from Node-RED via `mcp-tools`
+  - Redirects the request to `mcp-client`
+  - Forwards the result to `mcp-server` (local or remote)
   
 - **`mcp-client`**
-  - Realiza a comunicação com um modelo de linguagem (LLM)
-  - Atualmente usa o modelo `gpt-4o` da OpenAI
-  - Pode ser modificado para usar outros modelos no futuro (ex: Claude, Gemini, LLaMA)
+  - Handles communication with a language model (LLM)
+  - Currently uses OpenAI's `gpt-4o` model
+  - Can be modified to use other models in the future (e.g., Claude, Gemini, LLaMA)
 
 - **`mcp-server-demo`**
-  - Um exemplo funcional de MCP Server rodando localmente
-  - Contém "tools" (ferramentas) que podem ser chamadas pelo modelo, como:
-    - **Hello Tool**: responde com "Hello World"
-    - **Local Time**: retorna a hora local do servidor
-    - **Weather Tool**: consulta clima atual de São Paulo via `wttr.in`
+  - A functional example of an MCP Server running locally
+  - Contains "tools" that can be called by the model, such as:
+    - **Hello Tool**: responds with "Hello World"
+    - **Local Time**: returns the local server time
+    - **Weather Tool**: queries current weather in São Paulo via `wttr.in`
 
 ---
 
-### Pré-requisitos
+### Prerequisites
 
 - Docker
 - Docker Compose
 
-### Endpoints para verificar a integridade no mcp-host 
+### Endpoints to verify mcp-host integrity
 http://localhost:3000/health
 
-
-
-## Arquitetura
+## Architecture
 
 ```
 Node-RED Component → mcp-host (Express.js) → mcp-client → mcp-server
@@ -101,65 +126,64 @@ Node-RED Component → mcp-host (Express.js) → mcp-client → mcp-server
                                            OpenAI API
 ```
 
-### Componentes
+### Components
 
-#### 1. **mcp-host** (Servidor Web)
-- **Localização:** `/mcp-host/`
-- **Função:** Servidor Express.js que orquestra as comunicações
-- **Porta:** 3000 (configurável)
+#### 1. **mcp-host** (Web Server)
+- **Location:** `/mcp-host/`
+- **Function:** Express.js server that orchestrates communications
+- **Port:** 3000 (configurable)
 - **Endpoints:**
-  - `POST /execute` - Executa prompts
-  - `GET /health` - Status do servidor
-  - `GET /tools` - Lista ferramentas disponíveis
-  - `POST /disconnect` - Desconecta sessões
+  - `POST /execute` - Executes prompts
+  - `GET /health` - Server status
+  - `GET /tools` - Lists available tools
+  - `POST /disconnect` - Disconnects sessions
 
-#### 2. **mcp-client** (Cliente MCP)
-- **Localização:** `/mcp-client/`
-- **Função:** Classe que gerencia conexões com servidores MCP e OpenAI
-- **Recursos:**
-  - Conexão/desconexão automática
-  - Gerenciamento de sessões
-  - Conversão de ferramentas MCP para formato OpenAI
-  - Execução de prompts com tool calling
+#### 2. **mcp-client** (MCP Client)
+- **Location:** `/mcp-client/`
+- **Function:** Class that manages connections with MCP servers and OpenAI
+- **Features:**
+  - Automatic connection/disconnection
+  - Session management
+  - MCP tools conversion to OpenAI format
+  - Prompt execution with tool calling
 
-#### 3. **mcp-server** (Servidor MCP)
-- **Localização:** `/mcp-server/`
-- **Função:** Implementação do servidor MCP com ferramentas e recursos
-- **Ferramentas incluídas:**
-  - Hello Tool (exemplo)
-  - Users Tool (API externa)
-  - Textract Tool (análise de imagens)
+#### 3. **mcp-server** (MCP Server)
+- **Location:** `/mcp-server/`
+- **Function:** MCP server implementation with tools and resources
+- **Included tools:**
+  - Hello Tool (example)
+  - Users Tool (external API)
+  - Textract Tool (image analysis)
 
-#### 4. **node-red-mcp-component** (Componente Node-RED)
-- **Localização:** `/node-red-mcp-component/`
-- **Função:** Nó customizável para Node-RED
-- **Configurações:**
-  - URL do MCP Host
-  - API Key da OpenAI
-  - Comando do servidor MCP
-  - Argumentos do servidor MCP
+#### 4. **node-red-mcp-component** (Node-RED Component)
+- **Location:** `/node-red-mcp-component/`
+- **Function:** Customizable Node-RED node
+- **Configurations:**
+  - MCP Host URL
+  - OpenAI API Key
+  - MCP server command
+  - MCP server arguments
   - Session ID
   - Timeout
 
-
-## Endpoints da API
+## API Endpoints
 
 ### POST /execute
 
-Executa um prompt através do agente MCP.
+Executes a prompt through the MCP agent.
 
-**Corpo da Requisição:**
+**Request Body:**
 ```json
 {
   "prompt": "show hello world message",
-  "apiKey": "sk-sua-chave-aqui",
+  "apiKey": "sk-your-key-here",
   "serverCommand": "node",
   "serverArgs": ["../mcp-server/build/index.js"],
   "sessionId": "default"
 }
 ```
 
-**Resposta:**
+**Response:**
 ```json
 {
   "success": true,
@@ -171,9 +195,9 @@ Executa um prompt através do agente MCP.
 
 ### GET /health
 
-Verifica o status do servidor.
+Checks server status.
 
-**Resposta:**
+**Response:**
 ```json
 {
   "status": "ok",
@@ -184,39 +208,77 @@ Verifica o status do servidor.
 
 ### GET /tools
 
-Lista ferramentas disponíveis.
+Lists available tools.
 
-**Parâmetros de Query:**
-- `apiKey` - API Key da OpenAI
-- `serverCommand` - Comando do servidor MCP
-- `serverArgs` - Argumentos do servidor MCP
+**Query Parameters:**
+- `apiKey` - OpenAI API Key
+- `serverCommand` - MCP server command
+- `serverArgs` - MCP server arguments
 
+## Installation and Configuration (without Docker)
 
-## Instalação e Configuração rodar sem docker
-
-### 1. Preparar os Componentes
+### 1. Prepare Components
 
 ```bash
-# Instalar dependências do mcp-server
+# Install mcp-server dependencies
 cd mcp-server
 npm install
 npm run build
 
-# Instalar dependências do mcp-client
+# Install mcp-client dependencies
 cd ../mcp-client
 npm install
 npm run build
 
-# Instalar dependências do mcp-host
+# Install mcp-host dependencies
 cd ../mcp-host
 npm install
 ```
 
-### 2. Iniciar o MCP Host
+### 2. Start MCP Host
 
 ```bash
 cd mcp-host
 npm start
 ```
 
-O servidor rodará na porta 3000.
+The server will run on port 3000.
+
+## 🤝 Contributing
+
+1. **Fork** the project
+2. **Create a branch** for your feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+### Help Channels
+
+- **📧 Email**: [your-email@example.com](mailto:your-email@example.com)
+- **🐛 Issues**: [GitHub Issues](https://github.com/moises-paschoalick/node-red-mcp-server/issues)
+- **💬 Discord**: [Discord Link](https://discord.gg/your-server)
+- **📖 Wiki**: [Wiki Documentation](https://github.com/moises-paschoalick/node-red-mcp-server/wiki)
+
+### Useful Resources
+
+- [Node-RED Documentation](https://nodered.org/docs/)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
+- [Railway Documentation](https://docs.railway.app/)
+- [OpenAI API Documentation](https://platform.openai.com/docs/)
+
+## 🙏 Acknowledgments
+
+- [Node-RED](https://nodered.org/) - Visual programming platform
+- [Railway](https://railway.app/) - Deployment platform
+- [OpenAI](https://openai.com/) - Language models
+- [MCP Community](https://modelcontextprotocol.io/) - MCP Protocol
+
+---
+
+**⭐ If this template was helpful, consider giving a star to the repository!**
