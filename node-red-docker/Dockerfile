@@ -8,16 +8,20 @@ USER root
 # Copia os dados do projeto (com package.json) para /data
 COPY node_red_data /data
 
-# Fix permissions before npm install
-RUN chown -R node-red:node-red /data
+# Fix permissions and ensure npm can write to /data
+RUN chown -R node-red:node-red /data && \
+    chmod -R 755 /data
 
 # Instala as dependências do package.json que está em /data
+# Execute as node-red user to avoid permission issues
+USER node-red
 RUN cd /data && npm install --no-cache --unsafe-perm --no-update-notifier --no-fund --only=production
 
-# Fix permissions again after npm install
+# Switch back to root to fix final permissions
+USER root
 RUN chown -R node-red:node-red /data
 
-# Switch back to node-red user
+# Switch back to node-red user for runtime
 USER node-red
 
 # Expose port for Railway
