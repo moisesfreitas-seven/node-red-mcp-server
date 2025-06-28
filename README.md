@@ -54,11 +54,12 @@ Steps to run the project via docker compose:
 1. Clone this repository:
    ```bash
    git clone https://github.com/moises-paschoalick/node-red-mcp-server
-   cd node-red-docker
+   cd node-red-mcp-server
    docker compose up -d
    ```
 
 2. Open the project at: http://localhost:1899/
+
 
 3. Install the mcp-tools node
    To do this, we need to have the mcp-tools node, install node-red-contrib-mcp-tools in the Node-RED UI.
@@ -241,6 +242,7 @@ npm install
 cd mcp-host
 npm start
 ```
+
 
 The server will run on port 3000.
 
