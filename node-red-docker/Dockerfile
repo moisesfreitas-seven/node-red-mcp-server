@@ -2,27 +2,23 @@
 
 FROM nodered/node-red:4.0.0
 
-# Copy package.json to the WORKDIR so npm builds all
-# of your added nodes modules for Node-RED
+# Switch to root for installation
+USER root
 
-COPY node_red_data/package.json /data/
-WORKDIR /data
-
-RUN npm install --no-cache --unsafe-perm --no-update-notifier --no-fund --only=production
-
+# Copia os dados do projeto (com package.json) para /data
 COPY node_red_data /data
 
-# Copy _your_ Node-RED project files into place
-# NOTE: This will only work if you DO NOT later mount /data as an external volume.
-#       If you need to use an external volume for persistence then
-#       copy your settings and flows files to that volume instead.
-#COPY node_red_data/settings.js /data/settings.js
-#COPY node_red_data/flows_cred.json /data/flows_cred.json
-#COPY node_red_data/flows.json /data/flows.json
+# Instala as dependências do package.json que está em /data
+RUN cd /data && npm install --no-cache --unsafe-perm --no-update-notifier --no-fund --only=production
 
-# You should add extra nodes via your package.json file but you can also add them here:
-#WORKDIR /usr/src/node-red
-#RUN npm install node-red-node-smooth
- 
-# Start the container normally
-#CMD ["npm", "start", "--", "--userDir", "/data", "--settings", "/data/settings.js"]
+# Fix permissions for node-red user
+RUN chown -R node-red:node-red /data
+
+# Switch back to node-red user
+USER node-red
+
+# Expose port for Railway
+EXPOSE 1880
+
+# Start Node-RED with the correct command
+CMD ["npm", "start", "--", "--userDir", "/data"]
