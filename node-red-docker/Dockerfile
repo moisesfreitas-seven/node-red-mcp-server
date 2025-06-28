@@ -1,14 +1,16 @@
+# Dockerfile optimized for Railway deployment with production-ready configuration
+
 FROM nodered/node-red:4.0.0
 
 # Copy package.json to the WORKDIR so npm builds all
 # of your added nodes modules for Node-RED
 
-#COPY node_red_data/package.json .
-#RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
+COPY node_red_data/package.json /data/
+WORKDIR /data
+
+RUN npm install --no-cache --unsafe-perm --no-update-notifier --no-fund --only=production
 
 COPY node_red_data /data
-WORKDIR /data
-RUN npm install --no-cache --unsafe-perm --no-update-notifier --no-fund --only=production
 
 # Copy _your_ Node-RED project files into place
 # NOTE: This will only work if you DO NOT later mount /data as an external volume.
