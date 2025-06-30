@@ -21,7 +21,7 @@ Exemplo de um MCP remoto:
 npx -y @smithery/cli@latest run @nickclyde/duckduckgo-mcp-server --key sua-chave-do-smithery
 ```
 
-[🔗 Encontre outros MCPs no smithery.io](https://smithery.io)
+[🔗 Encontre outros MCPs no smithery.ai](https://smithery.ai)
 
 ## 🚀 Templates Prontos para Deploy
 
@@ -382,7 +382,7 @@ docker logs -f mcp-host
 ### MCP Servers Suportados
 
 - **Local MCP Server**: Incluído no projeto
-- **Remote MCP Servers**: Via Smithery.io
+- **Remote MCP Servers**: Via Smithery.ai
 - **Custom MCP Servers**: Sua própria implementação
 
 ### LLMs Suportados

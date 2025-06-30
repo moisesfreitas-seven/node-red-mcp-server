@@ -21,7 +21,7 @@ Example of a remote MCP:
 npx -y @smithery/cli@latest run @nickclyde/duckduckgo-mcp-server --key your-smithery-key
 ```
 
-[🔗 Find other MCPs on smithery.io](https://smithery.io)
+[🔗 Find other MCPs on smithery.ai](https://smithery.ai)
 
 ## 🚀 Ready-to-Deploy Templates
 

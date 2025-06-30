@@ -229,7 +229,7 @@ docker run -d \
 ### Supported MCP Servers
 
 - **Local MCP Server**: Included in template
-- **Remote MCP Servers**: Via Smithery.io
+- **Remote MCP Servers**: Via Smithery.ai
 - **Custom MCP Servers**: Your own implementation
 
 ### Supported LLMs
